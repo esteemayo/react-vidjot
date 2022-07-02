@@ -2,16 +2,9 @@ import http from './httpService';
 
 const apiEndPoint = '/auth';
 
-http.setJwt(getJwt());
+export const login = (user) => http.post(`${apiEndPoint}/login`, user);
 
-export function login(user) {
-  return http.post(`${apiEndPoint}/login`, user);
-}
+export const updateUserPassword = (userData) =>
+  http.patch(`${apiEndPoint}/update-my-password`, userData);
 
-export function updateUserPassword(userData) {
-  return http.patch(`${apiEndPoint}/update-my-password`, userData);
-}
-
-function getJwt() {
-  return localStorage.getItem('token');
-}
+export const getJwt = () => localStorage.getItem('token');
