@@ -1,9 +1,8 @@
 import { Route, Redirect } from 'react-router-dom';
-
-import { useGlobalContext } from '../context/GlobalState';
+import { useGlobalAuthContext } from 'context/auth/AuthContext';
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
-  const { user } = useGlobalContext();
+  const { user } = useGlobalAuthContext();
 
   return (
     <Route
