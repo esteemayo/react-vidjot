@@ -116,3 +116,9 @@ footer {
 .redirect h5 {
   font-size: 30px;
 }
+
+.error-container {
+  height: 35vh;
+  text-align: center;
+  font-size: 40px;
+}
