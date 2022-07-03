@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { FaSignInAlt } from 'react-icons/fa';
 
-import { login } from '../services/authService';
-import Button from '../components/Button';
-import Input from '../components/Input';
-import logo from '../img/logo.png';
+import logo from 'img/logo.png';
+import Input from 'components/Input';
+import Button from 'components/Button';
+import { login } from 'services/authService';
 import { useGlobalAuthContext } from 'context/auth/AuthContext';
 
 const Login = () => {

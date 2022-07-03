@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { FaUser } from 'react-icons/fa';
 
-import { register } from '../services/userService';
-import Button from '../components/Button';
-import Input from '../components/Input';
-import logo from '../img/logo.png';
+import logo from 'img/logo.png';
+import Input from 'components/Input';
+import Button from 'components/Button';
+import { register } from 'services/userService';
 import { useGlobalAuthContext } from 'context/auth/AuthContext';
 
 const Register = () => {
