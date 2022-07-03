@@ -51,13 +51,13 @@ const Navbar = () => {
                       <FaRegUser style={iconStyling} />
                     </Link>
                   </li>
-                  <li className='nav-item'>
-                    <Link to='#' className='nav-link' onClick={() => logout()}>
+                  <Link to='/auth/login' className='nav-link' onClick={logout}>
+                    <li className='nav-item'>
                       <IoLogOutOutline
                         style={{ fontSize: '1.5rem', color: '#fff' }}
                       />
-                    </Link>
-                  </li>
+                    </li>
+                  </Link>
                 </>
               )}
               {!user && (
