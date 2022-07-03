@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 
-import { useGlobalContext } from '../context/GlobalState';
-import { createIdea } from '../services/ideaService';
-import TextArea from '../components/TextArea';
-import Button from '../components/Button';
-import Input from '../components/Input';
+import Input from 'components/Input';
+import Button from 'components/Button';
+import TextArea from 'components/TextArea';
+import { createIdea } from 'services/ideaService';
+import { useGlobalContext } from 'context/ideas/IdeaContext';
 
 const IdeaForm = ({ history }) => {
   const { addIdea } = useGlobalContext();
