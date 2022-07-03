@@ -1,28 +1,27 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
-import axios from 'axios';
 
-import { useGlobalContext } from './context/GlobalState';
-import ProtectedRoute from './util/ProtectedRoute';
-import Navbar from './components/Navbar';
-import AuthRoute from './util/AuthRoute';
-import Footer from './components/Footer';
-import IdeaForm from './pages/IdeaForm';
-import Register from './pages/Register';
-import EditIdea from './pages/EditIdea';
-import Alert from './components/Alert';
-import Account from './pages/Account';
-import Login from './pages/Login';
-import About from './pages/About';
-import Error from './pages/Error';
-import Ideas from './pages/Ideas';
-import Home from './pages/Home';
+import ProtectedRoute from 'util/ProtectedRoute';
+import {
+  About,
+  Account,
+  Error,
+  EditIdea,
+  Home,
+  IdeaForm,
+  Ideas,
+  Login,
+  Register,
+} from 'pages';
+import Navbar from 'components/Navbar';
+import AuthRoute from 'util/AuthRoute';
+import Footer from 'components/Footer';
+import Alert from 'components/Alert';
 
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-
-axios.defaults.baseURL = 'http://localhost:7070/api/v1';
+import { useGlobalContext } from 'context/ideas/IdeaContext';
 
 function App() {
   const { alert } = useGlobalContext();
