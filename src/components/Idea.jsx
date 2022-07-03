@@ -2,8 +2,8 @@ import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 import { FaPen, FaTrash } from 'react-icons/fa';
 
-import { useGlobalContext } from '../context/ideas/IdeaContext';
-import Button from '../components/Button';
+import Button from 'components/Button';
+import { useGlobalContext } from 'context/ideas/IdeaContext';
 
 const Idea = ({ id, title, author, details, createdAt }) => {
   const { handleDelete: onDelete } = useGlobalContext();
