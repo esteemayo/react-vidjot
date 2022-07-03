@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { FaArrowRight } from 'react-icons/fa';
 
 import Input from 'components/Input';
@@ -7,19 +8,23 @@ import TextArea from 'components/TextArea';
 import { createIdea } from 'services/ideaService';
 import { useGlobalContext } from 'context/ideas/IdeaContext';
 
-const IdeaForm = ({ history }) => {
+const initialStates = {
+  title: '',
+  details: '',
+};
+
+const IdeaForm = () => {
+  const history = useHistory();
   const { addIdea } = useGlobalContext();
 
   const [errors, setErrors] = useState({});
-  const [values, setValues] = useState({
-    title: '',
-    details: '',
-  });
+  const [values, setValues] = useState(initialStates);
 
   const { title, details } = values;
 
   const handleChange = ({ target: input }) => {
-    setValues({ ...values, [input.name]: input.value });
+    const { name, value } = input;
+    setValues({ ...values, [name]: value });
   };
 
   const validateForm = () => {
