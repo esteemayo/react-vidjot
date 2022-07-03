@@ -4,6 +4,7 @@ import { FaUser } from 'react-icons/fa';
 import logo from 'img/logo.png';
 import Input from 'components/Input';
 import Button from 'components/Button';
+import { registerInputs } from 'formData';
 import { register } from 'services/userService';
 import { useGlobalAuthContext } from 'context/auth/AuthContext';
 
@@ -100,43 +101,22 @@ const Register = () => {
             onChange={handleChange}
             error={errors.name}
           />
-          <Input
-            type='email'
-            name='email'
-            label='Email'
-            placeholder='user@example.com'
-            value={email}
-            onChange={handleChange}
-            error={errors.email}
-          />
-          <Input
-            name='username'
-            label='Username'
-            placeholder='Enter your username'
-            value={username}
-            onChange={handleChange}
-            error={errors.username}
-          />
-          <Input
-            minLength='8'
-            type='password'
-            name='password'
-            label='Password'
-            placeholder='********'
-            value={password}
-            onChange={handleChange}
-            error={errors.password}
-          />
-          <Input
-            minLength='8'
-            type='password'
-            placeholder='********'
-            name='passwordConfirm'
-            label='Confirm Password'
-            value={passwordConfirm}
-            onChange={handleChange}
-            error={errors.passwordConfirm}
-          />
+
+          {registerInputs.map((input) => {
+            const { id, name, type, label, placeholder } = input;
+            return (
+              <Input
+                key={id}
+                type={type}
+                name={name}
+                label={label}
+                placeholder={placeholder}
+                value={values[name]}
+                onChange={handleChange}
+                error={errors[name]}
+              />
+            );
+          })}
 
           <Button
             color='dark'
