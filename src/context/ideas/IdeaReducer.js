@@ -27,6 +27,20 @@ const IdeaReducer = (state, { payload, type }) => {
     };
   }
 
+  if (type === actions.UPDATE_IDEA) {
+    return {
+      ...state,
+      ideas: state.ideas.map((idea) =>
+        idea._id === payload.id ? payload : idea
+      ),
+      alert: {
+        show: true,
+        type: 'success',
+        msg: 'Video idea updated successfully.',
+      },
+    };
+  }
+
   if (type === actions.DELETE_IDEA) {
     return {
       ...state,

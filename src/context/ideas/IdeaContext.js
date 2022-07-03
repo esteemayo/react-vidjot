@@ -24,6 +24,13 @@ const IdeaProvider = ({ children }) => {
     dispatch({ type: actions.ADD_IDEA, payload: idea });
   };
 
+  const editIdea = (idea) => {
+    dispatch({
+      type: actions.UPDATE_IDEA,
+      payload: idea,
+    });
+  };
+
   const handleDelete = async (id) => {
     const originalIdeas = [...state.ideas];
     dispatch({
@@ -46,7 +53,14 @@ const IdeaProvider = ({ children }) => {
 
   return (
     <IdeaContext.Provider
-      value={{ ...state, dispatch, addIdea, hideAlert, handleDelete }}
+      value={{
+        ...state,
+        dispatch,
+        addIdea,
+        editIdea,
+        hideAlert,
+        handleDelete,
+      }}
     >
       {children}
     </IdeaContext.Provider>
