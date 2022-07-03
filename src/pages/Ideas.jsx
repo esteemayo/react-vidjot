@@ -1,9 +1,24 @@
-import { useGlobalContext } from '../context/GlobalState';
-import Spinner from '../components/Spinner';
-import Idea from '../components/Idea';
+import { useCallback, useEffect } from 'react';
+
+import Idea from 'components/Idea';
+import Spinner from 'components/Spinner';
+import { getIdeas } from 'services/ideaService';
+import { useGlobalContext } from 'context/ideas/IdeaContext';
+import { useGlobalAuthContext } from 'context/auth/AuthContext';
 
 const Ideas = () => {
-  const { ideas, loading } = useGlobalContext();
+  const { user } = useGlobalAuthContext();
+  const { ideas, loading, dispatch } = useGlobalContext();
+
+  const fetchIdeas = useCallback(async () => {
+    const { data: ideas } = await getIdeas();
+    dispatch({ type: 'DISPLAY_IDEAS', payload: ideas });
+    dispatch({ type: 'LOADING' });
+  }, [dispatch]);
+
+  useEffect(() => {
+    user && fetchIdeas();
+  }, [fetchIdeas, user]);
 
   if (loading) {
     return (
