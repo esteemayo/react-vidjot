@@ -2,10 +2,10 @@ import { Link } from 'react-router-dom';
 import { IoLogOutOutline } from 'react-icons/io5';
 import { FaHome, FaRegUser } from 'react-icons/fa';
 
-import { useGlobalContext } from '../context/GlobalState';
+import { useGlobalAuthContext } from 'context/auth/AuthContext';
 
 const Navbar = () => {
-  const { user, logout } = useGlobalContext();
+  const { user, logout } = useGlobalAuthContext();
 
   return (
     <div className='container-fluid'>

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { FaArrowAltCircleRight } from 'react-icons/fa';
 
-import { useGlobalContext } from '../context/GlobalState';
-import { updateUserData } from '../services/userService';
-import Button from '../components/Button';
-import Input from '../components/Input';
+import Input from 'components/Input';
+import Button from 'components/Button';
+import { updateUserData } from 'services/userService';
+import { useGlobalAuthContext } from 'context/auth/AuthContext';
 
 const UserData = () => {
-  const { user, login } = useGlobalContext();
+  const { user, login } = useGlobalAuthContext();
 
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState({

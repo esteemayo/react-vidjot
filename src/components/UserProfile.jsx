@@ -1,9 +1,8 @@
 import Moment from 'react-moment';
-
-import { useGlobalContext } from '../context/GlobalState';
+import { useGlobalAuthContext } from 'context/auth/AuthContext';
 
 const UserProfile = () => {
-  const { user } = useGlobalContext();
+  const { user } = useGlobalAuthContext();
 
   return (
     <div className='col-md-6 text-left'>

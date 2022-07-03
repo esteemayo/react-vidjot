@@ -1,12 +1,12 @@
 import { FaCogs } from 'react-icons/fa';
 
-import { useGlobalContext } from '../context/GlobalState';
 import { deactivateAcc } from '../services/userService';
+import { useGlobalAuthContext } from 'context/auth/AuthContext';
 
 import Button from './Button';
 
 const Deactivate = () => {
-  const { logout } = useGlobalContext();
+  const { logout } = useGlobalAuthContext();
 
   const deleteMe = async () => {
     try {
