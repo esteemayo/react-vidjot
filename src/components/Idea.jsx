@@ -2,7 +2,7 @@ import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 import { FaPen, FaTrash } from 'react-icons/fa';
 
-import { useGlobalContext } from '../context/GlobalState';
+import { useGlobalContext } from '../context/ideas/IdeaContext';
 import Button from '../components/Button';
 
 const Idea = ({ id, title, author, details, createdAt }) => {

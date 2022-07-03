@@ -1,20 +1,22 @@
 import { useState } from 'react';
 import { FaArrowAltCircleRight } from 'react-icons/fa';
 
-import { updateUserPassword } from '../services/authService';
-import { useGlobalContext } from '../context/GlobalState';
-import Button from './Button';
 import Input from './Input';
+import Button from './Button';
+import { updateUserPassword } from '../services/authService';
+import { useGlobalAuthContext } from 'context/auth/AuthContext';
+
+const initialState = {
+  password: '',
+  passwordCurrent: '',
+  passwordConfirm: '',
+};
 
 const UserPassword = () => {
-  const { login } = useGlobalContext();
+  const { login } = useGlobalAuthContext();
 
   const [errors, setErrors] = useState({});
-  const [values, setValues] = useState({
-    password: '',
-    passwordCurrent: '',
-    passwordConfirm: '',
-  });
+  const [values, setValues] = useState(initialState);
 
   const { password, passwordCurrent, passwordConfirm } = values;
 
