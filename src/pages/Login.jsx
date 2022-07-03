@@ -7,18 +7,19 @@ import Button from 'components/Button';
 import { login } from 'services/authService';
 import { useGlobalAuthContext } from 'context/auth/AuthContext';
 
+const initialStates = {
+  email: '',
+  password: '',
+};
+
 const Login = () => {
   const { login: loginWithJWT } = useGlobalAuthContext();
 
   const [errors, setErrors] = useState({});
-  const [values, setValues] = useState({
-    email: '',
-    password: '',
-  });
+  const [values, setValues] = useState(initialStates);
 
   const handleChange = ({ target: input }) => {
-    const name = input.name;
-    const value = input.value;
+    const { name, value } = input;
     setValues({ ...values, [name]: value });
   };
 

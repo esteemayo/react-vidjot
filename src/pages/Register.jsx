@@ -7,20 +7,23 @@ import Button from 'components/Button';
 import { register } from 'services/userService';
 import { useGlobalAuthContext } from 'context/auth/AuthContext';
 
+const initialStates = {
+  name: '',
+  email: '',
+  username: '',
+  password: '',
+  passwordConfirm: '',
+};
+
 const Register = () => {
   const { login } = useGlobalAuthContext();
 
   const [errors, setErrors] = useState({});
-  const [values, setValues] = useState({
-    name: '',
-    email: '',
-    username: '',
-    password: '',
-    passwordConfirm: '',
-  });
+  const [values, setValues] = useState(initialStates);
 
   const handleChange = ({ target: input }) => {
-    setValues({ ...values, [input.name]: input.value });
+    const { name, value } = input;
+    setValues({ ...values, [name]: value });
   };
 
   const { name, email, username, password, passwordConfirm } = values;
