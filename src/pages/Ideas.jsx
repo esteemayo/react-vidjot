@@ -30,7 +30,11 @@ const Ideas = () => {
   }
 
   if (ideas.length === 0) {
-    return <p>No video ideas listed</p>;
+    return (
+      <div className='error-container'>
+        <p>No video ideas listed</p>
+      </div>
+    );
   }
 
   return (
