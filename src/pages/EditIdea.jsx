@@ -1,20 +1,26 @@
-import { useState, useEffect, useCallback } from 'react';
-import { FaArrowRight } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { FaArrowRight } from 'react-icons/fa';
+import { useState, useEffect, useCallback } from 'react';
 
-import { getIdea, updateIdea } from '../services/ideaService';
-import TextArea from '../components/TextArea';
-import Button from '../components/Button';
-import Input from '../components/Input';
+import Input from 'components/Input';
+import Button from 'components/Button';
+import TextArea from 'components/TextArea';
+import { getIdea, updateIdea } from 'services/ideaService';
+import { useGlobalContext } from 'context/ideas/IdeaContext';
+
+const initialStates = {
+  title: '',
+  details: '',
+};
 
 const EditIdea = () => {
   const { id } = useParams();
+  const history = useHistory();
+  const { editIdea } = useGlobalContext();
 
   const [errors, setErrors] = useState({});
-  const [values, setValues] = useState({
-    title: '',
-    details: '',
-  });
+  const [values, setValues] = useState(initialStates);
 
   const fetchIdea = useCallback(async () => {
     const { data } = await getIdea(id);
@@ -22,8 +28,8 @@ const EditIdea = () => {
   }, [id]);
 
   useEffect(() => {
-    fetchIdea();
-  }, [fetchIdea]);
+    id && id !== '' && fetchIdea();
+  }, [fetchIdea, id]);
 
   const { title, details } = values;
 
@@ -55,9 +61,14 @@ const EditIdea = () => {
 
     if (!validateForm) return;
 
-    const updObj = { title, details };
-    await updateIdea(id, updObj);
-    window.location.reload();
+    try {
+      const updObj = { title, details };
+      const { data } = await updateIdea(id, updObj);
+      editIdea(data);
+      history.push('/ideas');
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
