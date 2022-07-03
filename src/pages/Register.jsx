@@ -1,14 +1,14 @@
 import { useState } from 'react';
 import { FaUser } from 'react-icons/fa';
 
-import { useGlobalContext } from '../context/GlobalState';
 import { register } from '../services/userService';
 import Button from '../components/Button';
 import Input from '../components/Input';
 import logo from '../img/logo.png';
+import { useGlobalAuthContext } from 'context/auth/AuthContext';
 
 const Register = () => {
-  const { login } = useGlobalContext();
+  const { login } = useGlobalAuthContext();
 
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState({
