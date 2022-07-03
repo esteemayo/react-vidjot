@@ -1,4 +1,6 @@
-import { Route, Redirect } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+
+import LoadingToRedirect from './LoadingToRedirect';
 import { useGlobalAuthContext } from 'context/auth/AuthContext';
 
 const ProtectedRoute = ({ component: Component, ...rest }) => {
@@ -8,7 +10,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
     <Route
       {...rest}
       render={(props) =>
-        user ? <Component {...props} /> : <Redirect to='/auth/login' />
+        user ? <Component {...props} /> : <LoadingToRedirect />
       }
     />
   );
