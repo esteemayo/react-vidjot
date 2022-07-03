@@ -1,6 +1,5 @@
-import { useParams } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
 import { FaArrowRight } from 'react-icons/fa';
+import { useHistory, useParams } from 'react-router-dom';
 import { useState, useEffect, useCallback } from 'react';
 
 import Input from 'components/Input';
