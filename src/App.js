@@ -1,7 +1,13 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
+import Alert from 'components/Alert';
+import Navbar from 'components/Navbar';
+import AuthRoute from 'util/AuthRoute';
+import Footer from 'components/Footer';
 import ProtectedRoute from 'util/ProtectedRoute';
+import { useGlobalContext } from 'context/ideas/IdeaContext';
+import { useGlobalAuthContext } from 'context/auth/AuthContext';
 import {
   About,
   Account,
@@ -13,18 +19,14 @@ import {
   Login,
   Register,
 } from 'pages';
-import Navbar from 'components/Navbar';
-import AuthRoute from 'util/AuthRoute';
-import Footer from 'components/Footer';
-import Alert from 'components/Alert';
 
 import 'react-toastify/dist/ReactToastify.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { useGlobalContext } from 'context/ideas/IdeaContext';
 
 function App() {
   const { alert } = useGlobalContext();
+  const { modal } = useGlobalAuthContext();
 
   return (
     <Router>
@@ -32,6 +34,7 @@ function App() {
       <ToastContainer />
       <div className='container'>
         {alert.show && <Alert {...alert} />}
+        {modal.show && <Alert {...modal} />}
         <Switch>
           <Route exact path='/' component={Home} />
           <Route path='/about' component={About} />
