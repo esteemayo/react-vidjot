@@ -3,6 +3,7 @@ import { FaArrowAltCircleRight } from 'react-icons/fa';
 
 import Input from './Input';
 import Button from './Button';
+import { updatePasswordInputs } from 'formData';
 import { updateUserPassword } from 'services/authService';
 import { useGlobalAuthContext } from 'context/auth/AuthContext';
 
@@ -77,33 +78,21 @@ const UserPassword = () => {
       <h2 className='text-left text-uppercase'>Password change</h2>
       <hr />
       <form onSubmit={handleSubmit}>
-        <Input
-          type='password'
-          name='passwordCurrent'
-          label='Current Password'
-          placeholder='********'
-          value={passwordCurrent}
-          onChange={handleChange}
-          error={errors.passwordCurrent}
-        />
-        <Input
-          type='password'
-          name='password'
-          label='Password'
-          placeholder='********'
-          value={password}
-          onChange={handleChange}
-          error={errors.password}
-        />
-        <Input
-          type='password'
-          name='passwordConfirm'
-          label='Confirm Password'
-          placeholder='********'
-          value={passwordConfirm}
-          onChange={handleChange}
-          error={errors.passwordConfirm}
-        />
+        {updatePasswordInputs.map((input) => {
+          const { id, name, type, label, placeholder } = input;
+          return (
+            <Input
+              key={id}
+              type={type}
+              name={name}
+              label={label}
+              placeholder={placeholder}
+              value={values[name]}
+              onChange={handleChange}
+              error={errors[name]}
+            />
+          );
+        })}
         <Button
           type='submit'
           text='Save password'
