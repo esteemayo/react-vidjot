@@ -3,18 +3,21 @@ import { FaArrowAltCircleRight } from 'react-icons/fa';
 
 import Input from 'components/Input';
 import Button from 'components/Button';
+import { userDataInputs } from 'formData';
 import { updateUserData } from 'services/userService';
 import { useGlobalAuthContext } from 'context/auth/AuthContext';
+
+const initialState = {
+  name: '',
+  email: '',
+  username: '',
+};
 
 const UserData = () => {
   const { user, login } = useGlobalAuthContext();
 
   const [errors, setErrors] = useState({});
-  const [values, setValues] = useState({
-    name: '',
-    email: '',
-    username: '',
-  });
+  const [values, setValues] = useState(initialState);
 
   const { name, email, username } = values;
 
@@ -71,31 +74,21 @@ const UserData = () => {
       <h2 className='text-left text-uppercase'>Your account settings</h2>
       <hr />
       <form onSubmit={handleSubmit}>
-        <Input
-          name='name'
-          label='Name'
-          placeholder={user.name}
-          value={name}
-          onChange={handleChange}
-          error={errors.name}
-        />
-        <Input
-          type='email'
-          name='email'
-          label='Email'
-          placeholder={user.email}
-          value={email}
-          onChange={handleChange}
-          error={errors.email}
-        />
-        <Input
-          name='username'
-          label='Username'
-          placeholder={user.username}
-          value={username}
-          onChange={handleChange}
-          error={errors.username}
-        />
+        {userDataInputs.map((input) => {
+          const { id, name, type, label } = input;
+          return (
+            <Input
+              key={id}
+              type={type}
+              name={name}
+              label={label}
+              placeholder={user[name]}
+              value={values[name]}
+              onChange={handleChange}
+              error={errors[name]}
+            />
+          );
+        })}
         <Button
           type='submit'
           text='Save settings'
