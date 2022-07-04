@@ -8,6 +8,12 @@ import { useGlobalContext } from 'context/ideas/IdeaContext';
 const Idea = ({ id, title, author, details, createdAt }) => {
   const { handleDelete: onDelete } = useGlobalContext();
 
+  const deleteIdea = (id) => {
+    if (window.confirm('Are you sure?')) {
+      onDelete(id);
+    }
+  };
+
   return (
     <>
       <h4 className='text-uppercase'>{title}</h4>
@@ -26,7 +32,7 @@ const Idea = ({ id, title, author, details, createdAt }) => {
         text='Delete'
         color='danger'
         icon={<FaTrash style={iconStyling} />}
-        onClick={() => onDelete(id)}
+        onClick={() => deleteIdea(id)}
       />
       <div className='space'></div>
     </>
