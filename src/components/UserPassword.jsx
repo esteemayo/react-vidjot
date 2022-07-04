@@ -3,7 +3,7 @@ import { FaArrowAltCircleRight } from 'react-icons/fa';
 
 import Input from './Input';
 import Button from './Button';
-import { updateUserPassword } from '../services/authService';
+import { updateUserPassword } from 'services/authService';
 import { useGlobalAuthContext } from 'context/auth/AuthContext';
 
 const initialState = {
@@ -21,7 +21,8 @@ const UserPassword = () => {
   const { password, passwordCurrent, passwordConfirm } = values;
 
   const handleChange = ({ target: input }) => {
-    setValues({ ...values, [input.name]: input.value });
+    const { name, value } = input;
+    setValues({ ...values, [name]: value });
   };
 
   const validateForm = () => {

@@ -1,6 +1,6 @@
 import { FaCogs } from 'react-icons/fa';
 
-import { deactivateAcc } from '../services/userService';
+import { deactivateAcc } from 'services/userService';
 import { useGlobalAuthContext } from 'context/auth/AuthContext';
 
 import Button from './Button';
