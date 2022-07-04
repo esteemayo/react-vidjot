@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import Alert from 'components/Alert';
 import Navbar from 'components/Navbar';
