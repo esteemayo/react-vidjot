@@ -8,7 +8,7 @@ import { registerInputs } from 'formData';
 import { register } from 'services/userService';
 import { useGlobalAuthContext } from 'context/auth/AuthContext';
 
-const initialStates = {
+const initialState = {
   name: '',
   email: '',
   username: '',
@@ -20,7 +20,7 @@ const Register = () => {
   const { login } = useGlobalAuthContext();
 
   const [errors, setErrors] = useState({});
-  const [values, setValues] = useState(initialStates);
+  const [values, setValues] = useState(initialState);
 
   const handleChange = ({ target: input }) => {
     const { name, value } = input;

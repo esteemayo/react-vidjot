@@ -8,7 +8,7 @@ import TextArea from 'components/TextArea';
 import { createIdea } from 'services/ideaService';
 import { useGlobalContext } from 'context/ideas/IdeaContext';
 
-const initialStates = {
+const initialState = {
   title: '',
   details: '',
 };
@@ -18,7 +18,7 @@ const IdeaForm = () => {
   const { addIdea } = useGlobalContext();
 
   const [errors, setErrors] = useState({});
-  const [values, setValues] = useState(initialStates);
+  const [values, setValues] = useState(initialState);
 
   const { title, details } = values;
 

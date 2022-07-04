@@ -8,7 +8,7 @@ import TextArea from 'components/TextArea';
 import { getIdea, updateIdea } from 'services/ideaService';
 import { useGlobalContext } from 'context/ideas/IdeaContext';
 
-const initialStates = {
+const initialState = {
   title: '',
   details: '',
 };
@@ -19,7 +19,7 @@ const EditIdea = () => {
   const { editIdea } = useGlobalContext();
 
   const [errors, setErrors] = useState({});
-  const [values, setValues] = useState(initialStates);
+  const [values, setValues] = useState(initialState);
 
   const fetchIdea = useCallback(async () => {
     const { data } = await getIdea(id);
