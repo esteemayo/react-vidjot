@@ -2,14 +2,9 @@ import http from './httpService';
 
 const apiEndPoint = '/users';
 
-export function register(user) {
-  return http.post(`${apiEndPoint}/register`, user);
-}
+export const register = (user) => http.post(`${apiEndPoint}/register`, user);
 
-export function updateUserData(user) {
-  return http.patch(`${apiEndPoint}/update-me`, user);
-}
+export const updateUserData = (user) =>
+  http.patch(`${apiEndPoint}/update-me`, user);
 
-export function deactivateAcc() {
-  return http.delete(`${apiEndPoint}/delete-me`);
-}
+export const deactivateAcc = () => http.delete(`${apiEndPoint}/delete-me`);
