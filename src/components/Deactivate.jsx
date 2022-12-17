@@ -8,6 +8,10 @@ import Button from './Button';
 const Deactivate = () => {
   const { logout } = useGlobalAuthContext();
 
+  const handleDelete = async () => {
+    await deleteMe();
+  };
+
   const deleteMe = async () => {
     try {
       await deactivateAcc();
@@ -33,7 +37,7 @@ const Deactivate = () => {
         text='Deactivate'
         size='btn-block'
         color='danger'
-        onClick={deleteMe}
+        onClick={handleDelete}
         icon={<FaCogs style={iconStyling} />}
       />
     </div>
