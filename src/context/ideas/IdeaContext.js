@@ -21,7 +21,10 @@ const IdeaProvider = ({ children }) => {
   const [state, dispatch] = useReducer(IdeaReducer, INITIAL_STATE);
 
   const addIdea = (idea) => {
-    dispatch({ type: actions.ADD_IDEA, payload: idea });
+    dispatch({
+      type: actions.ADD_IDEA,
+      payload: idea,
+    });
   };
 
   const editIdea = (idea) => {
@@ -48,7 +51,9 @@ const IdeaProvider = ({ children }) => {
   };
 
   const hideAlert = () => {
-    dispatch({ type: actions.REMOVE_ALERT });
+    dispatch({
+      type: actions.REMOVE_ALERT,
+    });
   };
 
   return (
