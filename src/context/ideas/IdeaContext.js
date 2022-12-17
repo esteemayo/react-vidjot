@@ -20,6 +20,13 @@ const IdeaContext = createContext(INITIAL_STATE);
 const IdeaProvider = ({ children }) => {
   const [state, dispatch] = useReducer(IdeaReducer, INITIAL_STATE);
 
+  const displayIdeas = (ideas) => {
+    dispatch({
+      type: actions.DISPLAY_IDEAS,
+      payload: ideas,
+    });
+  };
+
   const addIdea = (idea) => {
     dispatch({
       type: actions.ADD_IDEA,
@@ -64,6 +71,7 @@ const IdeaProvider = ({ children }) => {
         addIdea,
         editIdea,
         hideAlert,
+        displayIdeas,
         handleDelete,
       }}
     >
