@@ -24,7 +24,7 @@ const IdeaForm = () => {
 
   const handleChange = ({ target: input }) => {
     const { name, value } = input;
-    setValues({ ...values, [name]: value });
+    setValues((prev) => ({ ...prev, [name]: value }));
   };
 
   const validateForm = () => {
