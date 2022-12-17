@@ -33,16 +33,23 @@ const AuthProvider = ({ children }) => {
 
   const login = (userData) => {
     localStorage.setItem(tokenKey, userData);
-    dispatch({ type: actions.LOGIN, payload: userData });
+    dispatch({
+      type: actions.LOGIN,
+      payload: userData,
+    });
   };
 
   const logout = () => {
     localStorage.removeItem(tokenKey);
-    dispatch({ type: actions.LOGOUT });
+    dispatch({
+      type: actions.LOGOUT,
+    });
   };
 
   const hideModal = () => {
-    dispatch({ type: actions.REMOVE_MODAL });
+    dispatch({
+      type: actions.REMOVE_MODAL,
+    });
   };
 
   return (
