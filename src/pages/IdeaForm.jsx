@@ -57,7 +57,7 @@ const IdeaForm = () => {
   };
 
   const handleIdea = async () => {
-    const { data: idea } = await createIdea(values);
+    const { data: idea } = await createIdea({ ...values });
     addIdea(idea);
   };
 
