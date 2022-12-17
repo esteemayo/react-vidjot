@@ -53,12 +53,21 @@ const UserData = () => {
     e.preventDefault();
 
     if (!validateForm()) return;
+    await handleUpdateUserData();
+  };
 
+  const handleUpdateUserData = async () => {
     try {
-      const filterBody = { name, email, username };
+      const filterBody = {
+        name,
+        email,
+        username,
+      };
+
       const { headers } = await updateUserData(filterBody);
       login(headers['x-auth-token']);
-      setValues({ name: '', email: '', username: '' });
+
+      setValues(initialState);
       window.location.reload();
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
