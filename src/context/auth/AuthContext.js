@@ -1,11 +1,14 @@
 import jwtDecode from 'jwt-decode';
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext, useEffect, useReducer } from 'react';
 
 import * as actions from './AuthTypes';
 import AuthReducer from './AuthReducer';
+import { getFromStorage, removeFromStorage, setToStorage, tokenKey } from 'util/index';
+
+const user = getFromStorage();
 
 const INITIAL_STATE = {
-  user: null,
+  user: user ?? null,
   loading: false,
   error: null,
   modal: {
@@ -15,14 +18,13 @@ const INITIAL_STATE = {
   },
 };
 
-const tokenKey = 'token';
 const token = localStorage.getItem(tokenKey);
 
 if (token) {
   const decodedToken = jwtDecode(token);
 
   if (decodedToken.exp * 1000 < Date.now()) {
-    localStorage.removeItem(tokenKey);
+    removeFromStorage();
   } else {
     INITIAL_STATE.user = decodedToken;
   }
@@ -40,7 +42,6 @@ const AuthProvider = ({ children }) => {
   };
 
   const loginSuccess = (userData) => {
-    localStorage.setItem(tokenKey, userData);
     dispatch({
       type: actions.LOGIN_SUCCESS,
       payload: userData,
@@ -55,7 +56,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const logout = () => {
-    localStorage.removeItem(tokenKey);
+    removeFromStorage(tokenKey);
     dispatch({
       type: actions.LOGOUT,
     });
@@ -66,6 +67,10 @@ const AuthProvider = ({ children }) => {
       type: actions.REMOVE_MODAL,
     });
   };
+
+  useEffect(() => {
+    setToStorage(tokenKey, state.user);
+  }, [state.user]);
 
   return (
     <AuthContext.Provider value={{
