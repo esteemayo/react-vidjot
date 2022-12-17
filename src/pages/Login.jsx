@@ -1,6 +1,7 @@
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 import { FaSignInAlt } from 'react-icons/fa';
+import { useHistory } from 'react-router-dom';
 
 import logo from 'img/logo.png';
 import Input from 'components/Input';
@@ -14,6 +15,7 @@ const initialState = {
 };
 
 const Login = () => {
+  const { push } = useHistory();
   const { user, error, loginFailure, loginStart, loginSuccess } = useGlobalAuthContext();
 
   const [errors, setErrors] = useState({});
@@ -52,7 +54,7 @@ const Login = () => {
     setErrors({});
 
     await handleLogin();
-    user && await window.location.replace('/ideas');
+    user && await push('/ideas');
   };
 
   const handleLogin = async () => {
