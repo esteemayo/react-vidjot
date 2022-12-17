@@ -13,7 +13,7 @@ const initialState = {
 };
 
 const Login = () => {
-  const { login: loginWithJWT } = useGlobalAuthContext();
+  const { user, login: loginWithJWT } = useGlobalAuthContext();
 
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState(initialState);
@@ -51,7 +51,7 @@ const Login = () => {
     setErrors({});
 
     await handleLogin();
-    await window.location.replace('/ideas');
+    user && await window.location.replace('/ideas');
   };
 
   const handleLogin = async () => {
