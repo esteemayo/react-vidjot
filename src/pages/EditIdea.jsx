@@ -61,11 +61,15 @@ const EditIdea = () => {
 
     if (!validateForm) return;
 
+    await handleUpdate();
+    await history.push('/ideas');
+  };
+
+  const handleUpdate = async () => {
     try {
       const updObj = { title, details };
       const { data } = await updateIdea(id, updObj);
       editIdea(data);
-      history.push('/ideas');
     } catch (err) {
       console.log(err);
     }
