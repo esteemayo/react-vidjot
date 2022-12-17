@@ -1,10 +1,18 @@
 import * as actions from './AuthTypes';
 
 const AuthReducer = (state, { payload, type }) => {
-  if (type === actions.LOGIN) {
+  if (type === actions.LOGIN_START) {
+    return {
+      ...state,
+      loading: true,
+    };
+  }
+
+  if (type === actions.LOGIN_SUCCESS) {
     return {
       ...state,
       user: payload,
+      loading: false,
       modal: {
         show: true,
         type: 'success',
