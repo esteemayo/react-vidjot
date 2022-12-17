@@ -47,6 +47,13 @@ const AuthProvider = ({ children }) => {
     });
   };
 
+  const loginFailure = (error) => {
+    dispatch({
+      type: actions.LOGIN_FAILURE,
+      payload: error,
+    });
+  };
+
   const logout = () => {
     localStorage.removeItem(tokenKey);
     dispatch({
@@ -61,7 +68,7 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ ...state, loginStart, loginSuccess, logout, hideModal }}>
+    <AuthContext.Provider value={{ ...state, loginFailure, loginStart, loginSuccess, logout, hideModal }}>
       {children}
     </AuthContext.Provider>
   );
