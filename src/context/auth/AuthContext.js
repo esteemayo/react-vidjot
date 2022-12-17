@@ -6,6 +6,8 @@ import AuthReducer from './AuthReducer';
 
 const INITIAL_STATE = {
   user: null,
+  loading: false,
+  error: null,
   modal: {
     show: false,
     type: '',
@@ -31,10 +33,16 @@ const AuthContext = createContext(INITIAL_STATE);
 const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AuthReducer, INITIAL_STATE);
 
-  const login = (userData) => {
+  const loginStart = () => {
+    dispatch({
+      type: actions.LOGIN_START,
+    });
+  };
+
+  const loginSuccess = (userData) => {
     localStorage.setItem(tokenKey, userData);
     dispatch({
-      type: actions.LOGIN,
+      type: actions.LOGIN_SUCCESS,
       payload: userData,
     });
   };
@@ -53,7 +61,7 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ ...state, login, logout, hideModal }}>
+    <AuthContext.Provider value={{ ...state, loginStart, loginSuccess, logout, hideModal }}>
       {children}
     </AuthContext.Provider>
   );
