@@ -67,7 +67,11 @@ const EditIdea = () => {
 
   const handleUpdate = async () => {
     try {
-      const updObj = { title, details };
+      const updObj = {
+        title,
+        details,
+      };
+
       const { data } = await updateIdea(id, updObj);
       editIdea(data);
     } catch (err) {
