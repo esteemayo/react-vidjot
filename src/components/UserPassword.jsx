@@ -53,12 +53,21 @@ const UserPassword = () => {
     e.preventDefault();
 
     if (!validateForm()) return;
+    await handleUpdateUserPassword();
+  };
 
+  const handleUpdateUserPassword = async () => {
     try {
-      const userData = { password, passwordCurrent, passwordConfirm };
+      const userData = {
+        password,
+        passwordCurrent,
+        passwordConfirm,
+      };
+
       const { headers } = await updateUserPassword(userData);
       login(headers['x-auth-token']);
-      setValues({ password: '', passwordCurrent: '', passwordConfirm: '' });
+
+      setValues(initialState);
       window.location.reload();
     } catch (ex) {
       if (ex.response && ex.response.status === 400) {
