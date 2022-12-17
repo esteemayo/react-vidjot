@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { useEffect, useState } from 'react';
 import { FaSignInAlt } from 'react-icons/fa';
 
 import logo from 'img/logo.png';
@@ -13,7 +14,7 @@ const initialState = {
 };
 
 const Login = () => {
-  const { user, login: loginWithJWT } = useGlobalAuthContext();
+  const { user, error, loginFailure, loginStart, loginSuccess } = useGlobalAuthContext();
 
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState(initialState);
@@ -55,9 +56,10 @@ const Login = () => {
   };
 
   const handleLogin = async () => {
+    loginStart();
     try {
       const { data: jwt } = await login(values);
-      loginWithJWT(jwt);
+      loginSuccess(jwt);
     } catch (ex) {
       if (ex.response && ex.response.status === 401) {
         const tempErrors = { ...errors };
@@ -65,8 +67,13 @@ const Login = () => {
         tempErrors.password = ex.response.data.message;
         setErrors(tempErrors);
       }
+      loginFailure(ex);
     }
   };
+
+  useEffect(() => {
+    error && toast.error(error);
+  }, [error]);
 
   return (
     <div className='col-md-6 mx-auto'>
