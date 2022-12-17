@@ -57,6 +57,12 @@ const IdeaProvider = ({ children }) => {
     }
   };
 
+  const hideLoading = () => {
+    dispatch({
+      type: actions.LOADING,
+    });
+  };
+
   const hideAlert = () => {
     dispatch({
       type: actions.REMOVE_ALERT,
@@ -71,6 +77,7 @@ const IdeaProvider = ({ children }) => {
         addIdea,
         editIdea,
         hideAlert,
+        hideLoading,
         displayIdeas,
         handleDelete,
       }}
