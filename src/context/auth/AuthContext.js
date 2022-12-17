@@ -3,7 +3,12 @@ import { createContext, useContext, useEffect, useReducer } from 'react';
 
 import * as actions from './AuthTypes';
 import AuthReducer from './AuthReducer';
-import { getFromStorage, removeFromStorage, setToStorage, tokenKey } from 'util/index';
+import {
+  getFromStorage,
+  removeFromStorage,
+  setToStorage,
+  tokenKey,
+} from 'util/index';
 
 const user = getFromStorage();
 
