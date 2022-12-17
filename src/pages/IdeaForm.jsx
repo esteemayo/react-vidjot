@@ -53,7 +53,7 @@ const IdeaForm = () => {
     setErrors({});
 
     await handleIdea();
-    history.push('/ideas');
+    await history.push('/ideas');
   };
 
   const handleIdea = async () => {
