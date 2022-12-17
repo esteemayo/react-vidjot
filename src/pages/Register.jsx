@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { toast } from 'react-toastify';
 import { FaUser } from 'react-icons/fa';
+import { useEffect, useState } from 'react';
 
 import logo from 'img/logo.png';
 import Input from 'components/Input';
@@ -17,7 +18,8 @@ const initialState = {
 };
 
 const Register = () => {
-  const { login } = useGlobalAuthContext();
+  const { user, error, loading, loginFailure, loginStart, loginSuccess }
+    = useGlobalAuthContext();
 
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState(initialState);
@@ -67,13 +69,14 @@ const Register = () => {
     setErrors({});
 
     await handleRegister();
-    await window.location.replace('/ideas');
+    user && await window.location.replace('/ideas');
   };
 
   const handleRegister = async () => {
+    loginStart();
     try {
       const res = await register(values);
-      login(res.headers['x-auth-token']);
+      loginSuccess(res.headers['x-auth-token']);
     } catch (ex) {
       if (ex.response && ex.response.status === 401) {
         const tempErrors = { ...errors };
@@ -84,8 +87,13 @@ const Register = () => {
         tempErrors.passwordConfirm = ex.response.data.message;
         setErrors(tempErrors);
       }
+      loginFailure(ex);
     }
   };
+
+  useEffect(() => {
+    error && toast.error(error);
+  }, [error]);
 
   return (
     <div className='col-md-6 mx-auto'>
@@ -124,6 +132,7 @@ const Register = () => {
             type='submit'
             text='Register'
             size='btn-block'
+            disabled={loading}
             icon={<FaUser style={iconStyling} />}
           />
         </form>
