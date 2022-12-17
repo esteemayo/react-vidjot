@@ -11,6 +11,7 @@ import {
 } from 'util/index';
 
 const user = getFromStorage();
+const token = localStorage.getItem(tokenKey);
 
 const INITIAL_STATE = {
   user: user ?? null,
@@ -22,8 +23,6 @@ const INITIAL_STATE = {
     msg: '',
   },
 };
-
-const token = localStorage.getItem(tokenKey);
 
 if (token) {
   const decodedToken = jwtDecode(token);
