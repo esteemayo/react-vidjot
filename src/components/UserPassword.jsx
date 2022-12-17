@@ -41,6 +41,10 @@ const UserPassword = () => {
       tempErrors.passwordConfirm = 'Confirm password field is required.';
     }
 
+    if (password !== passwordConfirm) {
+      tempErrors.password = 'Passwords do not match.';
+    }
+
     if (Object.keys(tempErrors).length > 0) {
       setErrors(tempErrors);
       return false;
