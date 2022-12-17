@@ -49,15 +49,16 @@ const IdeaForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!validateForm()) {
-      return;
-    }
-
+    if (!validateForm()) return;
     setErrors({});
 
+    await handleIdea();
+    history.push('/ideas');
+  };
+
+  const handleIdea = async () => {
     const { data: idea } = await createIdea(values);
     addIdea(idea);
-    history.push('/ideas');
   };
 
   return (
