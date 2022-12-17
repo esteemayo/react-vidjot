@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { useEffect, useState } from 'react';
 import { FaArrowAltCircleRight } from 'react-icons/fa';
 
 import Input from 'components/Input';
@@ -14,7 +15,8 @@ const initialState = {
 };
 
 const UserData = () => {
-  const { user, login } = useGlobalAuthContext();
+  const { user, error, loading, loginFailure, loginStart, loginSuccess }
+    = useGlobalAuthContext();
 
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState(initialState);
@@ -23,7 +25,7 @@ const UserData = () => {
 
   const handleChange = ({ target: input }) => {
     const { name, value } = input;
-    setValues({ ...values, [name]: value });
+    setValues((prev) => ({ ...prev, [name]: value }));
   };
 
   const validateForm = () => {
@@ -57,6 +59,7 @@ const UserData = () => {
   };
 
   const handleUpdateUserData = async () => {
+    loginStart();
     try {
       const filterBody = {
         name,
@@ -65,7 +68,7 @@ const UserData = () => {
       };
 
       const { headers } = await updateUserData(filterBody);
-      login(headers['x-auth-token']);
+      loginSuccess(headers['x-auth-token']);
 
       setValues(initialState);
       window.location.reload();
@@ -75,8 +78,13 @@ const UserData = () => {
         tempErrors.name = ex.response.data.message;
         setErrors(tempErrors);
       }
+      loginFailure(ex);
     }
   };
+
+  useEffect(() => {
+    error && toast.error(error);
+  }, [error]);
 
   return (
     <div>
@@ -103,6 +111,7 @@ const UserData = () => {
           text='Save settings'
           size='btn-block'
           color='dark'
+          disabled={loading}
           icon={<FaArrowAltCircleRight style={iconStyling} />}
         />
       </form>
