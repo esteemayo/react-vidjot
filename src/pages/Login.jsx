@@ -51,13 +51,13 @@ const Login = () => {
     setErrors({});
 
     await handleLogin();
+    await window.location.replace('/ideas');
   };
 
   const handleLogin = async () => {
     try {
       const { data: jwt } = await login(values);
       loginWithJWT(jwt);
-      window.location.replace('/ideas');
     } catch (ex) {
       if (ex.response && ex.response.status === 401) {
         const tempErrors = { ...errors };
