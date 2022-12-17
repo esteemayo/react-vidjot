@@ -17,7 +17,7 @@ const AuthReducer = (state, { payload, type }) => {
       modal: {
         show: true,
         type: 'success',
-        msg: 'You have successfully logged in.',
+        msg: 'You have successfully logged in',
       },
     };
   }
@@ -38,7 +38,7 @@ const AuthReducer = (state, { payload, type }) => {
       modal: {
         show: true,
         type: 'success',
-        msg: 'Logged you out.',
+        msg: 'Logged you out',
       },
     };
   }
