@@ -22,7 +22,7 @@ const IdeaReducer = (state, { payload, type }) => {
       alert: {
         show: true,
         type: 'success',
-        msg: 'Video idea added successfully.',
+        msg: 'Video idea added successfully',
       },
     };
   }
@@ -36,7 +36,7 @@ const IdeaReducer = (state, { payload, type }) => {
       alert: {
         show: true,
         type: 'success',
-        msg: 'Video idea updated successfully.',
+        msg: 'Video idea updated successfully',
       },
     };
   }
@@ -48,7 +48,7 @@ const IdeaReducer = (state, { payload, type }) => {
       alert: {
         show: true,
         type: 'danger',
-        msg: 'Video idea deleted successfully.',
+        msg: 'Video idea deleted successfully',
       },
     };
   }
