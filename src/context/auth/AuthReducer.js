@@ -5,6 +5,7 @@ const AuthReducer = (state, { payload, type }) => {
     return {
       ...state,
       loading: true,
+      error: null,
     };
   }
 
@@ -18,6 +19,15 @@ const AuthReducer = (state, { payload, type }) => {
         type: 'success',
         msg: 'You have successfully logged in.',
       },
+    };
+  }
+
+  if (type === actions.LOGIN_FAILURE) {
+    return {
+      ...state,
+      loading: false,
+      user: null,
+      error: payload.message,
     };
   }
 
