@@ -80,6 +80,10 @@ textarea {
   caret-color: #0d6efd;
 }
 
+button:disabled {
+  cursor: not-allowed;
+}
+
 footer {
   margin-top: 300px;
 }
