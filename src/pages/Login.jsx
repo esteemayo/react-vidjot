@@ -47,12 +47,13 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!validateForm()) {
-      return;
-    }
-
+    if (!validateForm()) return;
     setErrors({});
 
+    await handleLogin();
+  };
+
+  const handleLogin = async () => {
     try {
       const { data: jwt } = await login(values);
       loginWithJWT(jwt);
