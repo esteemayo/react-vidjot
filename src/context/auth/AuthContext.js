@@ -28,7 +28,7 @@ if (token) {
   const decodedToken = jwtDecode(token);
 
   if (decodedToken.exp * 1000 < Date.now()) {
-    removeFromStorage();
+    removeFromStorage(tokenKey);
   } else {
     INITIAL_STATE.user = decodedToken;
   }
