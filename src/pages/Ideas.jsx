@@ -5,17 +5,16 @@ import Spinner from 'components/Spinner';
 import { getIdeas } from 'services/ideaService';
 import { useGlobalContext } from 'context/ideas/IdeaContext';
 import { useGlobalAuthContext } from 'context/auth/AuthContext';
-import { DISPLAY_IDEAS, LOADING } from 'context/ideas/IdeaTypes';
 
 const Ideas = () => {
   const { user } = useGlobalAuthContext();
-  const { ideas, loading, dispatch } = useGlobalContext();
+  const { ideas, loading, displayIdeas, hideLoading } = useGlobalContext();
 
   const fetchIdeas = useCallback(async () => {
     const { data: ideas } = await getIdeas();
-    dispatch({ type: DISPLAY_IDEAS, payload: ideas });
-    dispatch({ type: LOADING });
-  }, [dispatch]);
+    displayIdeas(ideas);
+    hideLoading();
+  }, [displayIdeas, hideLoading]);
 
   useEffect(() => {
     user && fetchIdeas();
