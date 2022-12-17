@@ -29,6 +29,7 @@ if (token) {
 
   if (decodedToken.exp * 1000 < Date.now()) {
     removeFromStorage(tokenKey);
+    INITIAL_STATE.user = null;
   } else {
     INITIAL_STATE.user = decodedToken;
   }
