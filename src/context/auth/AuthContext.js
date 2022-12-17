@@ -68,7 +68,14 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ ...state, loginFailure, loginStart, loginSuccess, logout, hideModal }}>
+    <AuthContext.Provider value={{
+      ...state,
+      loginFailure,
+      loginStart,
+      loginSuccess,
+      logout,
+      hideModal,
+    }}>
       {children}
     </AuthContext.Provider>
   );
