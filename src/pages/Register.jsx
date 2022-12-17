@@ -63,16 +63,17 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!validateForm()) {
-      return;
-    }
-
+    if (!validateForm()) return;
     setErrors({});
 
+    await handleRegister();
+    await window.location.replace('/ideas');
+  };
+
+  const handleRegister = async () => {
     try {
       const res = await register(values);
       login(res.headers['x-auth-token']);
-      window.location.replace('/ideas');
     } catch (ex) {
       if (ex.response && ex.response.status === 401) {
         const tempErrors = { ...errors };
