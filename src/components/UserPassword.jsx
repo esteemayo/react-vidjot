@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { toast } from 'react-toastify';
+import { useEffect, useState } from 'react';
 import { FaArrowAltCircleRight } from 'react-icons/fa';
 
 import Input from './Input';
@@ -14,7 +15,8 @@ const initialState = {
 };
 
 const UserPassword = () => {
-  const { login } = useGlobalAuthContext();
+  const { error, loading, loginFailure, loginStart, loginSuccess }
+    = useGlobalAuthContext();
 
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState(initialState);
@@ -61,6 +63,8 @@ const UserPassword = () => {
   };
 
   const handleUpdateUserPassword = async () => {
+    loginStart();
+
     try {
       const userData = {
         password,
@@ -69,7 +73,7 @@ const UserPassword = () => {
       };
 
       const { headers } = await updateUserPassword(userData);
-      login(headers['x-auth-token']);
+      loginSuccess(headers['x-auth-token']);
 
       setValues(initialState);
       window.location.reload();
@@ -83,8 +87,14 @@ const UserPassword = () => {
         tempErrors.passwordConfirm = ex.response.data.message.slice(41);
         setErrors(tempErrors);
       }
+
+      loginFailure(ex);
     }
   };
+
+  useEffect(() => {
+    error && toast.error(error);
+  }, [error]);
 
   return (
     <div className='user-password'>
@@ -111,6 +121,7 @@ const UserPassword = () => {
           text='Save password'
           size='btn-block'
           color='dark'
+          disabled={loading}
           icon={<FaArrowAltCircleRight style={iconStyling} />}
         />
       </form>
