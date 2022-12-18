@@ -16,7 +16,7 @@ const Ideas = () => {
     dispatch({
       type: DISPLAY_IDEAS,
       payload: ideas,
-    })
+    });
     dispatch({ type: LOADING });
   }, [dispatch]);
 
