@@ -67,8 +67,9 @@ const UserData = () => {
         username,
       };
 
-      const { headers } = await updateUserData(filterBody);
-      loginSuccess(headers['x-auth-token']);
+      const { data } = await updateUserData({ ...filterBody });
+      loginSuccess(data);
+      // loginSuccess(headers['x-auth-token']);
 
       setValues(initialState);
       window.location.reload();
