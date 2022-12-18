@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useReducer } from 'react';
 
 import * as actions from './AuthTypes';
 import AuthReducer from './AuthReducer';
+import { getJwt } from 'services/authService';
 import {
   getFromStorage,
   removeFromStorage,
@@ -10,8 +11,8 @@ import {
   tokenKey,
 } from 'util/index';
 
-const user = getFromStorage();
-const token = localStorage.getItem(tokenKey);
+const token = getJwt();
+const user = getFromStorage(tokenKey);
 
 const INITIAL_STATE = {
   user: user ?? null,
@@ -30,8 +31,6 @@ if (token) {
   if (decodedToken.exp * 1000 < Date.now()) {
     removeFromStorage(tokenKey);
     INITIAL_STATE.user = null;
-  } else {
-    INITIAL_STATE.user = decodedToken;
   }
 }
 
