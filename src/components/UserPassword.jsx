@@ -72,8 +72,8 @@ const UserPassword = () => {
         passwordConfirm,
       };
 
-      const { headers } = await updateUserPassword(userData);
-      loginSuccess(headers['x-auth-token']);
+      const { data } = await updateUserPassword(userData);
+      loginSuccess(data);
 
       setValues(initialState);
       window.location.reload();
