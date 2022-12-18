@@ -75,8 +75,8 @@ const Register = () => {
   const handleRegister = async () => {
     loginStart();
     try {
-      const res = await register(values);
-      loginSuccess(res.headers['x-auth-token']);
+      const { data } = await register({ ...values });
+      loginSuccess(data);
     } catch (ex) {
       if (ex.response && ex.response.status === 401) {
         const tempErrors = { ...errors };
