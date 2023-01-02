@@ -1,6 +1,12 @@
 import { toast } from 'react-toastify';
 import { FaUser } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from 'firebase/storage';
 
 import app from '../firebase';
 import logo from 'img/logo.png';
