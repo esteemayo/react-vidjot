@@ -21,6 +21,7 @@ const Register = () => {
   const { user, error, loading, loginFailure, loginStart, loginSuccess }
     = useGlobalAuthContext();
 
+  const [file, setFile] = useState('');
   const [errors, setErrors] = useState({});
   const [values, setValues] = useState(initialState);
 
