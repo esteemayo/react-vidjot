@@ -71,6 +71,15 @@ body {
   margin-top: 5rem;
 }
 
+.avatar {
+  width: 20rem;
+  height: 20rem;
+  display: inline-block;
+  object-fit: cover;
+  border-radius: 3px;
+  margin-bottom: 1rem;
+}
+
 input {
   caret-color: #0d6efd;
 }
