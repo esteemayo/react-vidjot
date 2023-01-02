@@ -108,6 +108,12 @@ const UserData = () => {
             />
           );
         })}
+        <Input
+          id='file'
+          type='file'
+          label='Photo'
+          onChange={(e) => e.target.value}
+        />
         <Button
           type='submit'
           text='Save settings'
