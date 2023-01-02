@@ -8,6 +8,7 @@ import {
   getDownloadURL,
 } from 'firebase/storage';
 
+import app from '../firebase';
 import Input from 'components/Input';
 import Button from 'components/Button';
 import { userDataInputs } from 'formData';
