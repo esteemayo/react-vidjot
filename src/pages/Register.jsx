@@ -128,6 +128,13 @@ const Register = () => {
             );
           })}
 
+          <Input
+            id='file'
+            type='file'
+            label='Photo'
+            onChange={(e) => setFile(e.target.files[0])}
+          />
+
           <Button
             color='dark'
             type='submit'
