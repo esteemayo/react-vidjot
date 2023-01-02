@@ -8,7 +8,7 @@ const UserProfile = () => {
     <div className='col-md-6 text-left'>
       <h2 className='text-uppercase'>User Profile</h2>
       <div className='thumbnail'>
-        <img src={user.gravatar} alt='gravatar' />
+        <img src={user.photo} alt='avatar' />
       </div>
       <p>Name: {user.name}</p>
       <p>
