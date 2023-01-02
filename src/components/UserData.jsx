@@ -91,6 +91,50 @@ const UserData = () => {
     }
   };
 
+  const handleUpload = async () => {
+    const fileName = `${new Date().getTime()}-${file.name}`;
+
+    const storage = getStorage(app);
+    const storageRef = ref(storage, `images/${fileName}`);
+
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on('state_changed',
+      (snapshot) => {
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        console.log('Upload is ' + progress + '% done');
+        switch (snapshot.state) {
+          case 'paused':
+            console.log('Upload is paused');
+            break;
+          case 'running':
+            console.log('Upload is running');
+            break;
+
+          default:
+            break;
+        }
+      },
+      (error) => {
+        console.log(error);
+      },
+      () => {
+        getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
+          const filterBody = {
+            ...values,
+            photo: downloadURL,
+          };
+
+          const { data } = await updateUserData({ ...filterBody });
+          loginSuccess(data);
+
+          setValues(initialState);
+          window.location.reload();
+        });
+      }
+    );
+  };
+
   useEffect(() => {
     error && toast.error(error);
   }, [error]);
