@@ -1,6 +1,12 @@
 import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 import { FaArrowAltCircleRight } from 'react-icons/fa';
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from 'firebase/storage';
 
 import Input from 'components/Input';
 import Button from 'components/Button';
@@ -112,7 +118,7 @@ const UserData = () => {
           id='file'
           type='file'
           label='Photo'
-          onChange={(e) => e.target.value}
+          onChange={(e) => setFile(e.target.value)}
         />
         <Button
           type='submit'
