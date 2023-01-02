@@ -63,7 +63,12 @@ const UserData = () => {
     e.preventDefault();
 
     if (!validateForm()) return;
-    await handleUpdateUserData();
+
+    if (file) {
+      await handleUpload();
+    } else {
+      await handleUpdateUserData();
+    }
   };
 
   const handleUpdateUserData = async () => {
