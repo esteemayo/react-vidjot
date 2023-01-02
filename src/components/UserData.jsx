@@ -168,7 +168,7 @@ const UserData = () => {
           id='file'
           type='file'
           label='Photo'
-          onChange={(e) => setFile(e.target.value)}
+          onChange={(e) => setFile(e.target.files[0])}
         />
         <Button
           type='submit'
