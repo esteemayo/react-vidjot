@@ -2,6 +2,7 @@ import { toast } from 'react-toastify';
 import { FaUser } from 'react-icons/fa';
 import { useEffect, useState } from 'react';
 
+import app from '../firebase';
 import logo from 'img/logo.png';
 import Input from 'components/Input';
 import Button from 'components/Button';
