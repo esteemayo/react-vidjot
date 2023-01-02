@@ -8,7 +8,11 @@ const UserProfile = () => {
     <div className='col-md-6 text-left'>
       <h2 className='text-uppercase'>User Profile</h2>
       <div className='thumbnail'>
-        <img src={user.photo} alt='avatar' />
+        <img
+          src={user.photo ?? 'https://i.ibb.co/MBtjqXQ/no-avatar.gif'}
+          alt='avatar'
+          className='avatar'
+        />
       </div>
       <p>Name: {user.name}</p>
       <p>
@@ -20,5 +24,6 @@ const UserProfile = () => {
     </div>
   );
 };
+
 
 export default UserProfile;
